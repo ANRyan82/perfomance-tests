@@ -8,4 +8,4 @@ services:
       dockerfile: Dockerfile.compose-example
 
   redis:
-    image: redis:alpine
+     image: redis:alpine
