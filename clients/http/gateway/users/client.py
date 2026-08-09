@@ -1,0 +1,23 @@
+from clients.http.client import HTTPClient
+from typing import TypedDict
+from httpx import Response, Client
+
+class CreateUserRequestDict(TypedDict):
+        email: str
+        lastName: str
+        firstName: str
+        middleName: str
+        phoneNumber: str
+
+class UsersGatewayHTTPClient(HTTPClient):
+    def get_user_api(self, user_id: str) -> Response:
+        return self.get(f"/api/v1/users/{user_id}")
+
+    def create_user_api(self, request: CreateUserRequestDict) -> Response:
+        return self.post("/api/v1/users", json=request)
+
+#d = CreateUserRequestDict(email="an@mail.ru")
+
+users_cleient = UsersGatewayHTTPClient(client=Client(base_url="http://localhost:8003"))
+users_cleient.get_user_api(user_id="...")
+users_cleient.create_user_api(request=CreateUserRequestDict(...))
